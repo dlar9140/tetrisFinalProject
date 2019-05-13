@@ -2,6 +2,7 @@ package gamespace;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class TetrisProject
 {
@@ -37,6 +38,13 @@ public class TetrisProject
 	};
 	
 	private final Color[] myColor = {Color.CYAN,Color.magenta,Color.orange,Color.yellow,Color.black,Color.red}; 
+	
+	private Point pt;
+	private int currentPiece;
+	private int rotation;
+	private ArrayList<Integer> nextPiece = new ArrayList<Integer>();
+	private long score;
+	private Color [][] well;
 
 	
 	
