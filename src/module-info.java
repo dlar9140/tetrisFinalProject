@@ -7,4 +7,5 @@
  */
 module tetrisFinalProject
 {
+	requires java.desktop;
 }
