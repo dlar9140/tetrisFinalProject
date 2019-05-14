@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.JPanel;
 
-public class TetrisProject
+public class TetrisProject extends JPanel
 {
 	private final Point [][][] myPoint = {
 			{
@@ -78,9 +79,67 @@ public class TetrisProject
 		}
 	}
 
+	private boolean collidesAt(int x, int y, int rotation) 
+	{
+		for(Point p: myPoint [currentPiece][rotation])
+		{
+			if(well[p.x+x][p.y+y]!=Color.BLACK)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
+	private void rotate(int i)
+	{
+		int newRotation=(rotation+i)%4;
+		if(newRotation<0)
+		{
+			newRotation = 3;
+		}
+		
+		if(!collidesAt(pt.x, pt.y, newRotation))
+		{
+			rotation = newRotation;
+		}
+		repaint();
+	}
 	
+	public void move(int i)
+	{
+		if(collidesAt(pt.x, pt.y, rotation))
+		{
+			pt.x+=i;
+		}
+		
+		repaint();
+	}
+	public void drop(int i)
+	{
+		if(collidesAt(pt.x, pt.y, rotation))
+		{
+			pt.y+=i;
+		}
+		else
+		{
+			fixTowell();
+		}
+		repaint();
+	}
+	
+	public void fixTowell()
+	{
+		for(Point p: myPoint[currentPiece][rotation])
+		{
+			well[pt.x+p.x][pt.y+p.y] = myColor[currentPiece];
+		}
+		clearrows();
+		newPiece();
+	}
+	
+	public void 
 	
 
 
