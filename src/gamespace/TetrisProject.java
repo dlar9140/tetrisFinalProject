@@ -1,6 +1,7 @@
 package gamespace;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -152,18 +153,62 @@ public class TetrisProject extends JPanel
 	
 	public void clearrows()
 	{
-		boolean gap;
+		boolean gap = false;
 		int numClear = 0;
 		for(int j=21; j>0; j--)
 		{
 			gap = false;
 			for(int i=1; i<11; i++)
 			{
-				
+				if(well[i][j]==Color.BLACK)
+				{
+					gap = true;
+					break;
+				}
 			}
+		
+		
+		if(!gap)
+		{
+			deleteRow(numClear);
+			j+=1;
+			numClear+=1;
+			
+		}
+		
+		switch (numClear)
+		{
+		case 1:
+			score+=100;
+			break;
+		case 2:
+			score+=300;
+			break;
+		case 3:
+			score+=500;
+			break;
+		case 4:
+			score+=800;
+			break;
 		}
 	}
+		
+	private void drawPiece(Graphics g)
+	{
+		g.setColor(myColor[currentPiece]);
+		for(Point p: myPoint[currentPiece][rotation])
+		{
+			g.fillRect((p.x+pt.x)*26, (pt.y + p.y)*26,25,25);
+		}
+		
+	}
 	
+	public void paintComponent(Graphics g)
+	{
+		g.fillRect(0, 0, 26*12, height);
+	}
+			
+}
 
 
 public static void main(String [] args)
