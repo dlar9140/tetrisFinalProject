@@ -139,11 +139,28 @@ public class TetrisProject extends JPanel
 		newPiece();
 	}
 	
-	public void deleteRow()
+	public void deleteRow(int row)
 	{
 		for(int j=row-1; j>0; j--)
 		{
-			
+			for(int i=1; i<11; i++)
+			{
+				well[i][j+1] = well[i][j];
+			}
+		}
+	}
+	
+	public void clearrows()
+	{
+		boolean gap;
+		int numClear = 0;
+		for(int j=21; j>0; j--)
+		{
+			gap = false;
+			for(int i=1; i<11; i++)
+			{
+				
+			}
 		}
 	}
 	
