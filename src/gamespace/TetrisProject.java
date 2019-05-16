@@ -3,8 +3,12 @@ package gamespace;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class TetrisProject extends JPanel
@@ -117,11 +121,12 @@ public class TetrisProject extends JPanel
 		
 		repaint();
 	}
-	public void drop(int i)
+	public void drop()
 	{
 		if(collidesAt(pt.x, pt.y, rotation))
 		{
-			pt.y+=i;
+			int i = 0;
+			pt.y+=i; 
 		}
 		else
 		{
@@ -192,30 +197,118 @@ public class TetrisProject extends JPanel
 			break;
 		}
 	}
-		
-	private void drawPiece(Graphics g)
-	{
-		g.setColor(myColor[currentPiece]);
-		for(Point p: myPoint[currentPiece][rotation])
+			
+	
+private void paintComponent(Graphics g)	
+{
+		g.fillRect(0, 0, 26*12, 26*23);
 		{
-			g.fillRect((p.x+pt.x)*26, (pt.y + p.y)*26,25,25);
+			for(int j=0; j<23; j++)
+			{
+				int i;
+				g.setColor(well[i][j]);
+				g.fillRect(26*i, 26*j,25 , 25);
+			}
 		}
 		
-	}
-	
-	public void paintComponent(Graphics g)
-	{
-		g.fillRect(0, 0, 26*12, height);
+		g.setColor(Color.WHITE);
+		g.drawString("Score is :"+score, 19*12,25);
+		drawPiece(g);
 	}
 			
 }
 
 
-public static void main(String [] args)
+private void drawPiece(Graphics g)
 {
+	g.setColor(myColor[currentPiece]);
+	for(Point p: myPoint[currentPiece][rotation])
+	{
+		g.fillRect((p.x+pt.x)*26, (pt.y + p.y)*26,25,25);
+	}
 	
+}
+	
+
+private static void main(String [] args)
+{
+	JFrame f=new JFrame("TetrisProject");
+	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	f.setSize(12*26+10, 26*23+25);
+	f.setVisible(true);
+	
+	final TetrisProject game=new TetrisProject();
+	game.init();
+	f.add(game);
+	
+	f.addKeyListener(new KeyListener()
+	{
+
+		@Override
+		public void keyTyped(KeyEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e)
+		{
+			switch (e.getKeyCode())
+			{
+			case KeyEvent.VK_UP:
+				game.rotate(-1);
+				break;
+				
+			case KeyEvent.VK_DOWN:
+			game.rotate(+1);
+			break;
+			
+			case KeyEvent.VK_LEFT:
+			game.rotate(-1);
+			break;
+			
+			case KeyEvent.VK_SPACE:
+			game.drop();
+			game.score+=1;
+			break;
+			
+			}
+		}
+			
+	});
+	new Thread()
+	{
+		public void run()
+		{
+			while(true)
+			{
+				try
+				{
+					Thread.sleep(1000);
+				}
+				catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			game.drop();
+		
+	}.start();
+};
+
 }
 
 }
+
+
 	
 
