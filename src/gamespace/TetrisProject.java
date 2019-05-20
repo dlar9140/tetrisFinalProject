@@ -199,7 +199,7 @@ public class TetrisProject extends JPanel
 	}
 			
 @Override	
-private void paintComponent (Graphics g)
+public void paintComponent (Graphics g)
 {
 		g.fillRect(0, 0, 26*12, 26*23);
 		{
@@ -219,7 +219,7 @@ private void paintComponent (Graphics g)
 }
 
 
-private void drawPiece(Graphics g)
+public void drawPiece(Graphics g)
 {
 	g.setColor(myColor[currentPiece]);
 	for(Point p: myPoint[currentPiece][rotation])
@@ -230,7 +230,7 @@ private void drawPiece(Graphics g)
 }
 	
 
-private static void main(String [] args)
+public static void main(String [] args)
 {
 	JFrame f=new JFrame("TetrisProject");
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
