@@ -198,8 +198,8 @@ public class TetrisProject extends JPanel
 		}
 	}
 			
-	
-private void paintComponent(Graphics g)	
+@Override	
+private void paintComponent (Graphics g)
 {
 		g.fillRect(0, 0, 26*12, 26*23);
 		{
