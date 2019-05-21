@@ -274,6 +274,10 @@ public static void main(String [] args)
 			game.move(-1);
 			break;
 			
+			case KeyEvent.VK_RIGHT:
+			game.move(+1);
+			break;
+			
 			case KeyEvent.VK_SPACE:
 			game.drop();
 			game.score+=1;
