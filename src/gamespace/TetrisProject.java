@@ -197,15 +197,14 @@ public class TetrisProject extends JPanel
 			break;
 		}
 	}
-			
-@Override	
-public void paintComponent (Graphics g)
+}			
+public void paintComponent(Graphics g)
 {
 		g.fillRect(0, 0, 26*12, 26*23);
 		{
 			for(int j=0; j<23; j++)
 			{
-				int i;
+				int i=0; 
 				g.setColor(well[i][j]);
 				g.fillRect(26*i, 26*j,25 , 25);
 			}
@@ -216,7 +215,7 @@ public void paintComponent (Graphics g)
 		drawPiece(g);
 	}
 			
-}
+
 
 
 public void drawPiece(Graphics g)
@@ -272,7 +271,7 @@ public static void main(String [] args)
 			break;
 			
 			case KeyEvent.VK_LEFT:
-			game.rotate(-1);
+			game.move(-1);
 			break;
 			
 			case KeyEvent.VK_SPACE:
@@ -303,6 +302,7 @@ public static void main(String [] args)
 			game.drop();
 		
 	}.start();
+
 };
 
 }
